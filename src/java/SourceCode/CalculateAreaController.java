@@ -44,7 +44,7 @@ public class CalculateAreaController extends HttpServlet {
         out.println("<!DOCTYPE html>");
         out.println("<html>"); 
         out.println("<head>");
-        out.println("<title>Calculated Area!</title>");            
+        out.println("<title>Calculated Area!!</title>");            
         out.println("</head>");  
         
         try {
