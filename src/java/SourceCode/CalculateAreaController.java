@@ -7,6 +7,7 @@ package SourceCode;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,8 @@ public class CalculateAreaController extends HttpServlet {
     
     
     private CalculateArea ca;
-    
+    private final String NEXT_PAGE = "/ResultsPage.jsp";
+    private final String FINALE = "result";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,28 +42,34 @@ public class CalculateAreaController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ca = new CalculateArea();
         double numberOne, numberTwo;
-        PrintWriter out = response.getWriter();
-        out.println("<!DOCTYPE html>");
-        out.println("<html>"); 
-        out.println("<head>");
-        out.println("<title>Calculated Area!!</title>");            
-        out.println("</head>");  
+//        PrintWriter out = response.getWriter();
+//        out.println("<!DOCTYPE html>");
+//        out.println("<html>"); 
+//        out.println("<head>");
+//        out.println("<title>Calculated Area!!</title>");            
+//        out.println("</head>");  
         
         try {
             /* TODO output your page here. You may use following sample code. */
             numberOne = Double.parseDouble(request.getParameter("numberOne"));
             numberTwo = Double.parseDouble(request.getParameter("numberTwo"));
-            out.println("<body>");
-            out.println("<h1>Results: </h1><br>");
-            out.println("with " + numberOne + " and " + numberTwo + ", the area is: " + ca.getRectangularArea(numberOne, numberTwo) + "!");
-            out.println("</body>");
-            
+            double area = ca.getRectangularArea(numberOne, numberTwo);
+//            out.println("<body>");
+//            out.println("<h1>Results: </h1><br>");
+//            out.println("with " + numberOne + " and " + numberTwo + ", the area is: " +  "!");
+//            out.println("</body>");
+            request.setAttribute(FINALE, area);
+           
         }
         catch(NumberFormatException nfe){
-            out.println(" ERROR " + nfe + ".");
+//            out.println(" ERROR " + nfe + ".");
+            request.setAttribute(FINALE, nfe);
         }
-        out.println("<br><br><a href=index.html>Click here to go back!</a>");
-        out.println("</html>");  
+        
+        RequestDispatcher view = request.getRequestDispatcher(NEXT_PAGE);
+        view.forward(request, response);
+//        out.println("<br><br><a href=index.html>Click here to go back!</a>");
+//        out.println("</html>");  
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
