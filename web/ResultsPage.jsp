@@ -13,7 +13,8 @@
     </head>
     <body>
         <h1>Results</h1><br>
-        The Result is: ${result} 
+        You entered ${length} & ${width} <br>
+        The Result is: ${result} <br>
         <a href="index.html">Back To First Page</a><br>
     </body>
 </html>

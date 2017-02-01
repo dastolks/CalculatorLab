@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SourceCode;
+package Controller;
 
+import Model.CalculateArea;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -25,6 +26,8 @@ public class CalculateAreaController extends HttpServlet {
     
     private CalculateArea ca;
     private final String NEXT_PAGE = "/ResultsPage.jsp";
+    private final String LENGTH = "length";
+    private final String WIDTH = "width";
     private final String FINALE = "result";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,7 +44,7 @@ public class CalculateAreaController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ca = new CalculateArea();
-        double numberOne, numberTwo;
+        
 //        PrintWriter out = response.getWriter();
 //        out.println("<!DOCTYPE html>");
 //        out.println("<html>"); 
@@ -51,17 +54,20 @@ public class CalculateAreaController extends HttpServlet {
         
         try {
             /* TODO output your page here. You may use following sample code. */
-            numberOne = Double.parseDouble(request.getParameter("numberOne"));
-            numberTwo = Double.parseDouble(request.getParameter("numberTwo"));
+            String numberOne = request.getParameter("numberOne");
+            String numberTwo = request.getParameter("numberTwo");
             double area = ca.getRectangularArea(numberOne, numberTwo);
+            
 //            out.println("<body>");
 //            out.println("<h1>Results: </h1><br>");
 //            out.println("with " + numberOne + " and " + numberTwo + ", the area is: " +  "!");
 //            out.println("</body>");
+            request.setAttribute(LENGTH, numberOne);
+            request.setAttribute(WIDTH, numberTwo);
             request.setAttribute(FINALE, area);
            
         }
-        catch(NumberFormatException nfe){
+        catch(Exception nfe){
 //            out.println(" ERROR " + nfe + ".");
             request.setAttribute(FINALE, nfe);
         }

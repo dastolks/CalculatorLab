@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SourceCode;
+package Model;
 
 /**
  *
@@ -11,7 +11,10 @@ package SourceCode;
  */
 public class CalculateArea {
         
-    public double getRectangularArea(double first, double second){
-        return first * second;  
+    public double getRectangularArea(String first, String second){
+        double newFirst, newSecond; 
+        newFirst = Double.parseDouble(first);
+        newSecond = Double.parseDouble(second);
+        return newFirst * newSecond;  
     }
 }
